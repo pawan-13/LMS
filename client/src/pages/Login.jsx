@@ -16,7 +16,8 @@ import {
     TabsTrigger,
 } from "@/components/ui/tabs"
 import { useLoginUserMutation, useRegisterUserMutation } from "@/redux/api/authApi"
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import { toast } from "sonner"
 
 const Login = () => {
     const [loginInput, setLoginInput] = useState({ email: "", password: "", error: { email: "", password: "" } });
@@ -93,12 +94,24 @@ const Login = () => {
         }
     }
 
+    useEffect(() => {
+        if (registerIsSuccess && registerData) {
+            toast.success(registerData.message || "Signup Successfull");
+        }
+        if (registerIsError && registerError) {
+            toast.error(registerError.message || "Signup Failed");
+        }
+        if (loginIsError && loginError) {
+            toast.error(loginError.message || "Login Failed");
+        }
+        if (loginData && loginIsSuccess) {
+            toast.success(loginData.message || "Login Successfull");
+        }
+    }, [loginIsLoading, registerIsLoading, loginIsSuccess, registerIsSuccess, loginData, registerData, loginIsError, registerIsError, registerError, loginError]);
+
     return (
         <>
-            <div className="w-full bg-red-600 text-white p-4">
-                <h1 className="text-2xl text-center">Welcome Here!</h1>
-            </div>
-            <div className="w-96 m-auto mt-10">
+            <div className="flex items-center w-full justify-center mt-20">
                 <Tabs defaultValue="login" className="w-[400px]">
                     <TabsList className="grid w-full grid-cols-2">
                         <TabsTrigger value="login">Login</TabsTrigger>
@@ -183,7 +196,7 @@ const Login = () => {
                                         id="password"
                                         type="password"
                                         name="password"
-                                        maxLength = "10"
+                                        maxLength="10"
                                         value={signupInput.password}
                                         placeholder="Enter Your Password..."
                                         onChange={(e) => handleChange(e, 'signup')}
