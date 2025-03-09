@@ -100,7 +100,7 @@ const MobileNavbar = () => {
                     role === "instructor" && (
                         <SheetFooter>
                             <SheetClose asChild>
-                                <Button type="submit">Save changes</Button>
+                                <Button type="submit">Dashboard</Button>
                             </SheetClose>
                         </SheetFooter>
                     )
