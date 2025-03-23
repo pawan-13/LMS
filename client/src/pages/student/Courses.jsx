@@ -3,6 +3,7 @@ import Course from "./Course";
 
 
 const Courses = () => {
+  const Courses = [1,2,3,4,5,6,7,8];
   const isLoading = false;
   return (
     <div className="bg-gray-50">
@@ -11,7 +12,7 @@ const Courses = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {
-            isLoading ? Array.from({ length: 8 }, (_, index) => (<CourseSkeleton key={index} />)) : <Course />
+            isLoading ? Array.from({ length: 8 }, (_, index) => (<CourseSkeleton key={index} />)) : Courses.map((_,i)=>(<Course key={i} />)) 
           }
         </div>
       </div>
