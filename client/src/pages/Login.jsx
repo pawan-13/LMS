@@ -75,15 +75,12 @@ const Login = () => {
         if (flag) {
             if (type === "login") {
                 console.log("Login form submitted");
+                setLoginInput({ ...loginInput, email: "", password: "" });
                 await action(inputData);
             } else {
                 console.log("Signup form submitted");
-                await action(inputData);
-            }
-            if (type === 'login') {
-                setLoginInput({ ...loginInput, email: "", password: "" });
-            } else {
                 setSignupInput({ ...signupInput, name: "", email: "", password: "", });
+                await action(inputData);
             }
         } else {
             if (type === 'login') {

@@ -77,3 +77,34 @@ export const login = async (req, res) => {
         console.log(error.message, 'error');
     }
 };
+
+
+//Logout User Business logic
+export const logout = (_, res) => {
+    try {
+        return res.status(200).cookie('token', "", { maxAge: 0 }).json({
+            success: true,
+            message: "User logged out successfully"
+        })
+    } catch (error) {
+        console.log(error.message, 'error');
+        return res.status(500).json({
+            success: false,
+            message: "Failed to Logout"
+        })
+    }
+}
+
+
+//getUserDetails Business Logic
+export const getUserProfile = (req,res) => {
+    try {
+        
+    } catch (error) {
+        console.log(error.message,'error');
+        return res.status(404).json({
+            success: false,
+            message: "Failed to load user"
+        })
+    }
+}
