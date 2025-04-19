@@ -97,9 +97,22 @@ export const logout = (_, res) => {
 
 
 //getUserDetails Business Logic
-export const getUserProfile = (req,res) => {
+export const getUserProfile = async(req,res) => {
     try {
-        
+        const userId = req.id;
+        const User = await User.findById(userId).select("-password");
+        if(!User){
+            return res.status(404).json({
+                success:false,
+                message:"Profile not found"
+            })
+        };
+
+        return res.status(200).json({
+            success: true,
+            message: "User Profile Retrieved Successfully",
+            User
+        })
     } catch (error) {
         console.log(error.message,'error');
         return res.status(404).json({
