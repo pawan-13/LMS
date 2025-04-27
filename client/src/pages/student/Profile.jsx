@@ -6,9 +6,11 @@ import { Label } from "@/components/ui/label";
 import { DialogTrigger } from "@radix-ui/react-dialog";
 import { Loader2 } from "lucide-react";
 import Course from "./Course";
+import { useLoadUserQuery } from "@/redux/api/authApi.js";
 
 const Profile = () => {
-    const isLoading = false;
+    const{data,isLoading}  = useLoadUserQuery();
+    console.log(data)
     const enrolledCourses = [1,2,3,4,5,6];
     return (
         <div className="max-w-4xl mx-auto my-24 px-4">

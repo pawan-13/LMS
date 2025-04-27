@@ -17,9 +17,11 @@ import {
 } from "@/components/ui/tabs"
 import { useLoginUserMutation, useRegisterUserMutation } from "@/redux/api/authApi"
 import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
 import { toast } from "sonner"
 
 const Login = () => {
+    const navigate = useNavigate();
     const [loginInput, setLoginInput] = useState({ email: "", password: "", error: { email: "", password: "" } });
     const [signupInput, setSignupInput] = useState({ name: "", email: "", password: "", error: { name: "", email: "", password: "" } });
 
@@ -77,6 +79,7 @@ const Login = () => {
                 console.log("Login form submitted");
                 setLoginInput({ ...loginInput, email: "", password: "" });
                 await action(inputData);
+                navigate('/');
             } else {
                 console.log("Signup form submitted");
                 setSignupInput({ ...signupInput, name: "", email: "", password: "", });

@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 
-export const isAuthenticated = (req, res) => {
+const isAuthenticated = (req, res, next) => {
     try {
         const token = req.cookies.token;
         if (!token) {
@@ -17,8 +17,15 @@ export const isAuthenticated = (req, res) => {
                 message: 'Invalid Token!'
             })
         }
+        req.id = decode.userId;
+        next();
     } catch (error) {
         console.log(error.message, 'error');
+        return res.status(500).json({
+            success: false,
+            message: 'Internal Server Error'
+        });
     }
-
 }
+
+export default isAuthenticated;
